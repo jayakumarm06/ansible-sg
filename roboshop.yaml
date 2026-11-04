@@ -77,7 +77,8 @@
         msg: "  {{ item.item.key }}: {{ item.group_id }} "
       loop: "{{ sg_results.results }}"
       loop_control:
-        label: "{{ item.item.key }}"
+        label: "{{ item.item.key }}" #The first item is the loop variable. The second item is the original loop data saved in the registered result.
+
 
   # tasks:
   #   - name: create ec2 instance
