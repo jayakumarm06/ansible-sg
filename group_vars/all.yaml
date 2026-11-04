@@ -2,15 +2,34 @@ ansible_user: ec2-user
 ansible_password: DevOps321
 my_ip: 49.205.107.2/32
 
-service_ports:
-  mongodb: 27017
-  mysql: 3306
-  redis: 6379
-  rabbitmq: 5672
-  user: 8080
-  catalogue: 8080
-  cart: 8080
-  shipping: 8080
-  payment: 8080
+# service_ports:
+#   mongodb: 27017
+#   mysql: 3306
+#   redis: 6379
+#   rabbitmq: 5672
+#   user: 8080
+#   catalogue: 8080
+#   cart: 8080
+#   shipping: 8080
+#   payment: 8080
 
 # mongodb_host: mongodb.dewsecopai.online
+security_groups:
+  mongodb:
+    port: 27017
+  mysql:
+    port: 3306
+  redis:
+    port: 6379
+  rabbitmq:
+    port: 5672
+  catalogue:
+    port: 8080
+  user:
+    port: 8080
+  cart:
+    port: 8080
+  shipping:
+    port: 8080
+  payment:
+    port: 8080

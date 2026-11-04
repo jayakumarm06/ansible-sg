@@ -22,17 +22,44 @@
         "frontend",
       ]
     # ansible-playbook roboshop.yaml -e service_name="mongodb" -e actions="create"
+  # tasks:
+  #   - name: create security group
+  #     amazon.aws.ec2_security_group:
+  #       name: "{{ service_name }}-ansible-sg"
+  #       description: "{{ service_name }}-sg security group"
+  #       vpc_id: "{{ vpc_id }}"
+  #       region: us-east-1
+  #       rules:
+  #         - proto: tcp
+  #           from_port: "{{ service_ports[service_name] }}"
+  #           to_port: "{{ service_ports[service_name] }}"
+  #           cidr_ip: "{{ my_ip }}"
+  #           rule_desc: Allow mongodb access
+
+  #         - proto: tcp
+  #           from_port: 22
+  #           to_port: 22
+  #           cidr_ip: "{{ my_ip }}"
+  #           rule_desc: Allow SSH from IP
+  #       state: present
+  #     loop: "{{ service_name  }}"
+  #     register: sg
+
+  #   - name: print msg
+  #     debug:
+  #       msg: "  {{ sg.group_name }}: {{ sg.group_id }} "
+
   tasks:
     - name: create security group
       amazon.aws.ec2_security_group:
-        name: "{{ service_name }}-ansible-sg"
-        description: "{{ service_name }}-sg security group"
+        name: "{{ item.key }}-ansible-sg"
+        description: "{{ item.key }} security group"
         vpc_id: "{{ vpc_id }}"
         region: us-east-1
         rules:
           - proto: tcp
-            from_port: "{{ service_ports[service_name] }}"
-            to_port: "{{ service_ports[service_name] }}"
+            from_port: "{{ item.value.port }}"
+            to_port: "{{ item.value.port }}"
             cidr_ip: "{{ my_ip }}"
             rule_desc: Allow mongodb access
 
@@ -41,23 +68,14 @@
             to_port: 22
             cidr_ip: "{{ my_ip }}"
             rule_desc: Allow SSH from IP
-        state: present
-      loop: "{{ service_name  }}"
+      loop: "{{ security_groups | dict2items }}" #ansible filter converts a dict into list so loop can iterate
+      when: actions == "create"
       register: sg
 
     - name: print msg
       debug:
-        msg: "  {{ sg.group_name }}: {{ sg.group_id }} "
-
-    # - name: Allow Catalogue to access Mongodb
-    #   amazon.aws.ec2_security_group:
-
-    # - proto: tcp
-    #   from_port: 3306
-    #   to_port: 3306
-    #   group_id: sg-0abc1234567ffffff
-    #   rule_desc: Allow MySQL access from the database security group
-
+        # msg: "  {{ sg.group_name }}: {{ sg.group_id }} "
+        msg: "{{ sg  }}"
   # tasks:
   #   - name: create ec2 instance
   #     amazon.aws.ec2_instance:
