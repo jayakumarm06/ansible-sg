@@ -15,7 +15,6 @@
         description: mongo-ansible-sg security group
         vpc_id: "{{ vpc_id }}"
         region: us-east-1
-        state: present
         rules:
           - proto: tcp
             from_port: 27017
@@ -28,12 +27,14 @@
             to_port: 22
             cidr_ip: "{{ my_ip }}"
             rule_desc: Allow SSH from IP
+        state: present
         register: sg
 
     - name: print msg
       debug:
         msg:
           "{{ sg }}"
+
           # - proto: tcp
           #   from_port: 3306
           #   to_port: 3306
