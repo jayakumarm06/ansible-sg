@@ -91,16 +91,18 @@
       set_fact:
         mongodb_sg_id: "{{ item.group_id }}"
         mongodb_sg_name: "{{ item.group_name }}"
+        mongodb_sg_desc: "{{ item.description }}"
       loop: "{{ sg_results.results }}"
       when: item.item.key == "mongodb"
 
     - name: print the catalogue and mongodb-sg-id
       debug:
-        msg: "name={{ mongodb_sg_name }}"
+        msg: "name={{ mongodb_sg_name }} and desc={{ item.description }}"
 
     - name: Allow catalogue to mongodb
       amazon.aws.ec2_security_group:
         name: "{{ mongodb_sg_name }}"
+        description: "{{ item.description }}"
         vpc_id: "{{ vpc_id }}"
         purge_rules: false
         rules:
@@ -108,7 +110,7 @@
             from_port: 27017
             to_port: 27017
             group_id: "{{ catalogue_sg_id }}"
-        # state: present
+        state: present
 
     - name: print the catalogue and mongodb-sg-id
       debug:
