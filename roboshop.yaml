@@ -103,7 +103,7 @@
             from_port: 27017
             to_port: 27017
             group_id: "{{ catalogue_sg_id }}"
-        state: present
+        # state: present
 
     - name: print the catalogue and mongodb-sg-id
       debug:
