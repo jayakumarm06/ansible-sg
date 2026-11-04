@@ -21,6 +21,7 @@
         "dispatch",
         "frontend",
       ]
+    # ansible_playbook roboshop.yaml -e service_name="mongodb" -e actions="create"
   tasks:
     - name: create security group
       amazon.aws.ec2_security_group:
