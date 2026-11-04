@@ -90,12 +90,17 @@
     - name: get mongodb Sg Id
       set_fact:
         mongodb_sg_id: "{{ item.group_id }}"
+        mongodb_sg_name: "{{ item.group_name }}"
       loop: "{{ sg_results.results }}"
       when: item.item.key == "mongodb"
 
+    - name: print the catalogue and mongodb-sg-id
+      debug:
+        msg: "name={{ mongodb_sg_name }}"
+
     - name: Allow catalogue to mongodb
       amazon.aws.ec2_security_group:
-        group_id: "{{ mongodb_sg_id }}"
+        name: "{{ mongodb_sg_name }}"
         vpc_id: "{{ vpc_id }}"
         purge_rules: false
         rules:
