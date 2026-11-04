@@ -25,7 +25,7 @@
   tasks:
     - name: create security group
       amazon.aws.ec2_security_group:
-        name: "{{ service_name }}-sg"
+        name: "{{ service_name }}-ansible-sg"
         description: "{{ service_name }}-sg security group"
         vpc_id: "{{ vpc_id }}"
         region: us-east-1
