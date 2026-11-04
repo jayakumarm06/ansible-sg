@@ -89,7 +89,7 @@
 
     - name: get mongodb Sg Id
       set_fact:
-        mongodb_sg_id: "{{ item.groupid }}"
+        mongodb_sg_id: "{{ item.group_id }}"
       loop: "{{ sg_results.results }}"
       when: item.item.key == "mongodb"
 
