@@ -2,7 +2,9 @@ ansible_user: ec2-user
 ansible_password: DevOps321
 my_ip: 49.205.107.2/32
 
-# mysql: 3306
-# redis: 6379
-# rabbitmq: 5672
+service_ports:
+  mongodb: 27017
+  mysql: 3306
+  redis: 6379
+  rabbitmq: 5672
 # mongodb_host: mongodb.dewsecopai.online
