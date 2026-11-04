@@ -33,7 +33,7 @@
     - name: print msg
       debug:
         msg:
-          "{{ sg }}"
+          "{{ sg.group_id }}"
 
           # - proto: tcp
           #   from_port: 3306
