@@ -7,18 +7,31 @@
     # domain_name: dewsecopai.online
     # ami_id: ami-0055977a6e828a4f4
     vpc_id: vpc-0b7a72268d3c1a098
-
+    service_name:
+      [
+        "mongodb",
+        "redis",
+        "mysql",
+        "rabbitmq",
+        "catalogue",
+        "user",
+        "cart",
+        "shipping",
+        "payment",
+        "dispatch",
+        "frontend",
+      ]
   tasks:
-    - name: creat security group
+    - name: create security group
       amazon.aws.ec2_security_group:
-        name: mongo-ansible-sg
-        description: mongo-ansible-sg security group
+        name: "{{ service_name }}-sg"
+        description: "{{ service_name }}-sg security group"
         vpc_id: "{{ vpc_id }}"
         region: us-east-1
         rules:
           - proto: tcp
-            from_port: 27017
-            to_port: 27017
+            from_port: "{{ service_port }}"
+            to_port: "{{ service_port }}"
             cidr_ip: "{{ my_ip }}"
             rule_desc: Allow mongodb access
 
