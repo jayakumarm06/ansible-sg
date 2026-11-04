@@ -3,24 +3,6 @@
   connection: local
 
   vars:
-    # ansible-playbook roboshop.yaml -e '{"instances":["mongodb"]}'
-    # ansible-playbook roboshop.yaml -e actions="delete" -e '{"instances":["mongodb"]}'
-
-    # instances:
-    #   [
-    #     "mongodb",
-    #     "redis",
-    #     "mysql",
-    #     "rabbitmq",
-    #     "catalogue",
-    #     "user",
-    #     "cart",
-    #     "shipping",
-    #     "payment",
-    #     "dispatch",
-    #     "frontend",
-    #   ]
-    # instances: ["catalogue", "user", "cart", "shipping", "payment", "dispatch"]
     actions: create
     # domain_name: dewsecopai.online
     # ami_id: ami-0055977a6e828a4f4
