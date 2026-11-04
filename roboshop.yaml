@@ -31,8 +31,8 @@
         region: us-east-1
         rules:
           - proto: tcp
-            from_port: "{{ service_port[service_name] }}"
-            to_port: "{{ service_port[service_name] }}"
+            from_port: "{{ service_ports[service_name] }}"
+            to_port: "{{ service_ports[service_name] }}"
             cidr_ip: "{{ my_ip }}"
             rule_desc: Allow mongodb access
 
