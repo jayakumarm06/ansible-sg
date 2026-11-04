@@ -7,4 +7,10 @@ service_ports:
   mysql: 3306
   redis: 6379
   rabbitmq: 5672
+  user: 8080
+  catalogue: 8080
+  cart: 8080
+  shipping: 8080
+  payment: 8080
+
 # mongodb_host: mongodb.dewsecopai.online
