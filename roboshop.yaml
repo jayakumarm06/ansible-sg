@@ -70,11 +70,11 @@
             rule_desc: Allow SSH from IP
       loop: "{{ security_groups | dict2items }}" #ansible filter converts a dict into list so loop can iterate
       when: actions == "create"
-      register: sg
+      register: sg_results
 
     - name: print msg
       debug:
-        msg: "  {{ item.group_id }} "
+        msg: "  {{ item.group_name }}: {{ item.group_id }} "
       loop: "{{ sg_results.results }}"
 
   # tasks:
