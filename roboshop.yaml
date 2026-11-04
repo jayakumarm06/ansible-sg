@@ -74,8 +74,8 @@
 
     - name: print msg
       debug:
-        # msg: "  {{ sg.group_name }}: {{ sg.group_id }} "
-        msg: "{{ sg  }}"
+        msg: "  {{ sg.group_name }}: {{ sg.group_id }} "
+        # msg: "{{ sg  }}"
   # tasks:
   #   - name: create ec2 instance
   #     amazon.aws.ec2_instance:
