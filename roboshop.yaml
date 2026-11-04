@@ -46,14 +46,16 @@
 
     - name: print msg
       debug:
-        msg:
-          "  {{ sg.group_name }}: {{ sg.group_id }} "
+        msg: "  {{ sg.group_name }}: {{ sg.group_id }} "
 
-          # - proto: tcp
-          #   from_port: 3306
-          #   to_port: 3306
-          #   group_id: sg-0abc1234567ffffff
-          #   rule_desc: Allow MySQL access from the database security group
+    # - name: Allow Catalogue to access Mongodb
+    #   amazon.aws.ec2_security_group:
+
+    # - proto: tcp
+    #   from_port: 3306
+    #   to_port: 3306
+    #   group_id: sg-0abc1234567ffffff
+    #   rule_desc: Allow MySQL access from the database security group
 
   # tasks:
   #   - name: create ec2 instance
