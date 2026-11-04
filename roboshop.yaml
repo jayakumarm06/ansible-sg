@@ -28,7 +28,7 @@
             cidr_ip: "{{ my_ip }}"
             rule_desc: Allow SSH from IP
         state: present
-        register: sg
+      register: sg
 
     - name: print msg
       debug:
