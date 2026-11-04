@@ -97,12 +97,12 @@
 
     - name: print the catalogue and mongodb-sg-id
       debug:
-        msg: "name={{ mongodb_sg_name }} and desc={{ item.description }}"
+        msg: "name={{ mongodb_sg_name }} and desc={{ mongodb_sg_desc }}"
 
     - name: Allow catalogue to mongodb
       amazon.aws.ec2_security_group:
         name: "{{ mongodb_sg_name }}"
-        description: "{{ item.description }}"
+        description: "{{ mongodb_sg_desc }}"
         vpc_id: "{{ vpc_id }}"
         purge_rules: false
         rules:
