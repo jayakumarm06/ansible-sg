@@ -79,8 +79,37 @@
       loop_control:
         label: "{{ item.item.key }}" #The first item is the loop variable. The second item is the original loop data saved in the registered result.
 
+    #Allow backend service from db
+    # catalogue-sg  ----27017----> mongodb-sg
+    - name: Get catalogue SG ID
+      set_fact:
+        catalogue_sg_id: "{{ item.group_id }}"
+      loop: "{{ sg_results.results }}"
+      when: item.item.key == "catalogue"
 
-  # tasks:
+    - name: get mongodb Sg Id
+      set_fact:
+        mongodb_sg_id: "{{ item.groupid }}"
+      loop: "{{ sg_results.results }}"
+      when: item.item.key == "mongodb"
+
+    - name: Allow catalogue to mongodb
+      amazon.aws.ec2_security_group:
+        group_id: "{{ mongodb_sg_id }}"
+        vpc_id: "{{ vpc_id }}"
+        purge_rules: false
+        rules:
+          - proto: tcp
+            from_port: 27017
+            to_port: 27017
+            group_id: "{{ catalogue_sg_id }}"
+        state: present
+
+    - name: print the catalogue and mongodb-sg-id
+      debug:
+        msg: "MongoDB={{ mongodb_sg_id }}, Catalogue={{ catalogue_sg_id }}"
+
+    # tasks:
   #   - name: create ec2 instance
   #     amazon.aws.ec2_instance:
   #       name: "roboshop-{{ item }}"
